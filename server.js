@@ -43,6 +43,7 @@ const REWRITE_ACCEPT_ENCODING = process.env.REWRITE_ACCEPT_ENCODING === 'true';
 const APPEND_HEAD = process.env.APPEND_HEAD === 'true';
 const ALLOWED_HOSTS = getHosts(process.env.ALLOWED_HOSTS);
 const GZIP_METHOD = process.env.GZIP_METHOD;
+const BearerKey = process.env.BearerKey;
 
 assert.ok(ACCESS_KEY, 'Missing ACCESS_KEY');
 assert.ok(ALLOWED_GZIP_METHODS.includes(GZIP_METHOD), `GZIP_METHOD must be one of the following values: ${JSON.stringify(ALLOWED_GZIP_METHODS)}`);
@@ -177,6 +178,7 @@ const processResponse = (proxyRes, res, append) => {
 
 const onProxyReq = (proxyReq, req, res, options) => {
   proxyReq.setHeader('User-Agent', proxyReq.getHeader('proxy-override-user-agent') || DEFAULT_USERAGENT);
+  proxyReq.setHeader('Authorization', `${process.env.BearerKey}`)
   if (REWRITE_ACCEPT_ENCODING) {
     proxyReq.setHeader('Accept-Encoding', 'gzip');
   }
