@@ -179,7 +179,7 @@ const processResponse = (proxyRes, res, append) => {
 const onProxyReq = (proxyReq, req, res, options) => {
   proxyReq.setHeader('User-Agent', proxyReq.getHeader('proxy-override-user-agent') || DEFAULT_USERAGENT);
   
-  proxyReq.setHeader('authorization', `${process.env.BEARER_KEY}`)
+  proxyReq.setHeader('bearer_key', `${process.env.BEARER_KEY}`)
   proxyReq.setHeader('oauth_consumer_key', `${process.env.oauth_consumer_key}`)
   proxyReq.setHeader('oauth_consumer_secret', `${process.env.oauth_consumer_secret}`)
   
