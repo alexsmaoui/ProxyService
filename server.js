@@ -184,7 +184,6 @@ const onProxyReq = (proxyReq, req, res, options) => {
   proxyReq.setHeader('oauth_consumer_key', `${process.env.oauth_consumer_key}`)
   proxyReq.setHeader('oauth_secret', `${process.env.oauth_secret}`)
  
-  console.error(proxyReq.getHeader('authorization'))
   if (REWRITE_ACCEPT_ENCODING) {
     proxyReq.setHeader('Accept-Encoding', 'gzip');
   }
